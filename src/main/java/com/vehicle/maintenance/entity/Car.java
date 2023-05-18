@@ -31,7 +31,7 @@ public class Car {
     @Column(nullable = false)
     private String color;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     @JoinColumn(name = "customer_id")
     private Customer customer;
 }

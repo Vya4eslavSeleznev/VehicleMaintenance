@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-@Table(name = "service")
+@Table(name = "maintenance")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Maintenance {
@@ -26,7 +26,7 @@ public class Maintenance {
     @Column(nullable = false)
     private String description;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     @JoinColumn(name = "car_id")
     private Car car;
 }

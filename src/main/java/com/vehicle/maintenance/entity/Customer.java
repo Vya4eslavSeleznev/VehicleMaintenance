@@ -16,6 +16,15 @@ import java.util.Date;
 @AllArgsConstructor
 public class Customer {
 
+    public Customer(String name, String surname, String lastName, String phone, Date birthDate, Credential credential) {
+        this.name = name;
+        this.surname = surname;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.birthDate = birthDate;
+        this.credential = credential;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -35,7 +44,7 @@ public class Customer {
     @Column(name = "birth_date", nullable = false)
     private Date birthDate;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     @JoinColumn(name = "credential_id")
     private Credential credential;
 }
