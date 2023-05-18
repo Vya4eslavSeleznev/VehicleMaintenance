@@ -11,6 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class CustomerFindModel {
 
+    private long id;
     private String name;
     private String surname;
     private String lastName;
