@@ -9,7 +9,7 @@ import java.util.Date;
 @Setter
 @Getter
 @AllArgsConstructor
-public class CustomerSaveModel {
+public class CustomerInfoModel {
 
     private String name;
     private String surname;
@@ -17,5 +17,4 @@ public class CustomerSaveModel {
     private String phone;
     private Date birthDate;
     private String username;
-    private String password;
 }

@@ -9,13 +9,12 @@ import java.util.Date;
 @Setter
 @Getter
 @AllArgsConstructor
-public class CustomerSaveModel {
+public class CustomerUpdateModel {
 
+    private long id;
     private String name;
     private String surname;
     private String lastName;
     private String phone;
     private Date birthDate;
-    private String username;
-    private String password;
 }
