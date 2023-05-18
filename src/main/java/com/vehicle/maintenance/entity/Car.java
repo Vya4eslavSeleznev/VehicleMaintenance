@@ -15,6 +15,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Car {
 
+    public Car(String brand, String model, String engine, String color, Customer customer) {
+        this.brand = brand;
+        this.model = model;
+        this.engine = engine;
+        this.color = color;
+        this.customer = customer;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -31,7 +39,7 @@ public class Car {
     @Column(nullable = false)
     private String color;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     @JoinColumn(name = "customer_id")
     private Customer customer;
 }

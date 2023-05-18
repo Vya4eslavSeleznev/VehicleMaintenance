@@ -11,10 +11,16 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-@Table(name = "service")
+@Table(name = "maintenance")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Maintenance {
+
+    public Maintenance(Date date, String description, Car car) {
+        this.date = date;
+        this.description = description;
+        this.car = car;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +32,7 @@ public class Maintenance {
     @Column(nullable = false)
     private String description;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     @JoinColumn(name = "car_id")
     private Car car;
 }
