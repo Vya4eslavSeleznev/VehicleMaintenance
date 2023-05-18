@@ -16,6 +16,12 @@ import java.util.Date;
 @AllArgsConstructor
 public class Maintenance {
 
+    public Maintenance(Date date, String description, Car car) {
+        this.date = date;
+        this.description = description;
+        this.car = car;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

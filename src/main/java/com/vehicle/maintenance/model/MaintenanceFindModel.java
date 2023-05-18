@@ -9,12 +9,15 @@ import java.util.Date;
 @Setter
 @Getter
 @AllArgsConstructor
-public class CustomerInfoModel {
+public class MaintenanceFindModel {
 
+    private Date date;
+    private String description;
+    private String brand;
+    private String model;
+    private String engine;
+    private String color;
     private String name;
-    private String surname;
     private String lastName;
     private String phone;
-    private Date birthDate;
-    private String username;
 }

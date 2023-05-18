@@ -6,7 +6,7 @@ import com.vehicle.maintenance.entity.Customer;
 import com.vehicle.maintenance.entity.Maintenance;
 import com.vehicle.maintenance.exception.CustomerNotFoundException;
 import com.vehicle.maintenance.exception.InvalidInputDataException;
-import com.vehicle.maintenance.model.CustomerInfoModel;
+import com.vehicle.maintenance.model.CustomerFindModel;
 import com.vehicle.maintenance.model.CustomerSaveModel;
 import com.vehicle.maintenance.model.CustomerUpdateModel;
 import com.vehicle.maintenance.model.Role;
@@ -85,10 +85,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<CustomerInfoModel> findAllCustomers() {
+    public List<CustomerFindModel> findAllCustomers() {
         return StreamSupport
           .stream(customerRepository.findAll().spliterator(), false)
-          .map(elem -> new CustomerInfoModel(
+          .map(elem -> new CustomerFindModel(
             elem.getName(), elem.getSurname(), elem.getLastName(), elem.getPhone(),
             elem.getBirthDate(), elem.getCredential().getUsername()
           ))
@@ -96,14 +96,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerInfoModel findCustomerById(long id) throws CustomerNotFoundException {
+    public CustomerFindModel findCustomerById(long id) throws CustomerNotFoundException {
         Optional<Customer> customer = customerRepository.findById(id);
 
         if(customer.isEmpty()) {
             throw new CustomerNotFoundException();
         }
 
-        return new CustomerInfoModel(
+        return new CustomerFindModel(
           customer.get().getName(), customer.get().getSurname(), customer.get().getLastName(),
           customer.get().getPhone(), customer.get().getBirthDate(), customer.get().getCredential().getUsername()
         );

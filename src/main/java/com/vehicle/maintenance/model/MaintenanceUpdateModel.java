@@ -4,14 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Setter
 @Getter
 @AllArgsConstructor
-public class CarModel {
+public class MaintenanceUpdateModel {
 
-    private String brand;
-    private String model;
-    private String engine;
-    private String color;
-    private long customerId;
+    private long id;
+    private Date date;
+    private String description;
 }

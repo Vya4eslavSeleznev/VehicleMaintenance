@@ -5,9 +5,9 @@ import com.vehicle.maintenance.entity.Customer;
 import com.vehicle.maintenance.exception.CarNotFoundException;
 import com.vehicle.maintenance.exception.CustomerNotFoundException;
 import com.vehicle.maintenance.model.CarFindModel;
-import com.vehicle.maintenance.model.CarModel;
+import com.vehicle.maintenance.model.CarSaveModel;
 import com.vehicle.maintenance.model.CarUpdateModel;
-import com.vehicle.maintenance.model.CustomerInfoModel;
+import com.vehicle.maintenance.model.CustomerFindModel;
 import com.vehicle.maintenance.repository.CarRepository;
 import com.vehicle.maintenance.repository.CustomerRepository;
 import com.vehicle.maintenance.service.CarService;
@@ -27,7 +27,7 @@ public class CarServiceImpl implements CarService {
     private CustomerRepository customerRepository;
 
     @Override
-    public void saveCar(CarModel carModel) throws CustomerNotFoundException {
+    public void saveCar(CarSaveModel carModel) throws CustomerNotFoundException {
         Optional<Customer> customer = customerRepository.findById(carModel.getCustomerId());
 
         if(customer.isEmpty()) {
