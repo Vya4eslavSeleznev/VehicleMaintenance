@@ -15,6 +15,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Car {
 
+    public Car(String brand, String model, String engine, String color, Customer customer) {
+        this.brand = brand;
+        this.model = model;
+        this.engine = engine;
+        this.color = color;
+        this.customer = customer;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
