@@ -49,25 +49,21 @@ public class CarServiceTest {
     private Customer customer;
     private long id;
     private Date date;
-    private String brand;
-    private String model;
-    private String engine;
-    private String color;
     private CarUpdateModel carUpdateModel;
 
     @BeforeEach
     public void init() {
         id = 1;
-        brand = "brand";
-        model = "model";
-        engine = "engine";
-        color = "color";
+        String brand = "brand";
+        String model = "model";
+        String engine = "engine";
+        String color = "color";
         date = new Date();
         carSaveModel = new CarSaveModel(brand, model, engine, color, id);
         carUpdateModel = new CarUpdateModel(id, brand, model, engine, color);
 
         customer = new Customer(
-          "name", "surname", "lastname", "phone", date,
+          "name", "surname", "lastname", "7999887766", date,
           new Credential(Role.USER, "pwd", "login")
         );
 
@@ -189,7 +185,6 @@ public class CarServiceTest {
 
         verify(carRepository, times(1)).findById(id);
         verify(carRepository, times(1)).save(any(Car.class));
-
     }
 
     @Test
@@ -197,19 +192,3 @@ public class CarServiceTest {
         assertThrows(CarNotFoundException.class, () -> carService.updateCar(carUpdateModel));
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

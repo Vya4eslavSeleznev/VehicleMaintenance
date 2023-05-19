@@ -37,18 +37,18 @@ public class CustomUserDetailsServiceTest {
     private String username;
     private String password;
     private Credential expectedUC;
-    private Optional<Credential> optionalUC;
 
     @BeforeEach
     public void init() {
         username = "username";
         password = "pwd";
         expectedUC = new Credential(Role.USER, password, username);
-        optionalUC = Optional.of(expectedUC);
     }
 
     @Test
     public void should_load_user_by_username_returned_user_details() {
+        Optional<Credential> optionalUC = Optional.of(expectedUC);
+
         when(credentialRepository.findUserCredentialByUsername(username)).thenReturn(optionalUC);
 
         UserDetails actualUD = customUserDetailsService.loadUserByUsername(username);
@@ -65,6 +65,8 @@ public class CustomUserDetailsServiceTest {
 
     @Test
     public void should_get_authenticated_user_returned_user_credential() throws InvalidUserNameOrPasswordException {
+        Optional<Credential> optionalUC = Optional.of(expectedUC);
+
         when(credentialRepository.findUserCredentialByUsername(username)).thenReturn(optionalUC);
         when(passwordEncoder.matches(password, password)).thenReturn(true);
 
@@ -83,6 +85,8 @@ public class CustomUserDetailsServiceTest {
 
     @Test
     public void should_get_incorrect_password_exception() {
+        Optional<Credential> optionalUC = Optional.of(expectedUC);
+
         when(credentialRepository.findUserCredentialByUsername(username)).thenReturn(optionalUC);
         when(passwordEncoder.matches(password, password)).thenReturn(false);
         assertThrows(InvalidUserNameOrPasswordException.class, () ->

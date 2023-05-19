@@ -46,10 +46,8 @@ public class MaintenanceServiceTest {
     private Maintenance maintenance;
     private MaintenanceSaveModel maintenanceSaveModel;
     private MaintenanceUpdateModel maintenanceUpdateModel;
-    private Customer customer;
     private Car car;
     private long id;
-    private Optional<Maintenance> maintenanceOpt;
 
     @BeforeEach
     public void init() {
@@ -60,14 +58,11 @@ public class MaintenanceServiceTest {
         maintenanceSaveModel = new MaintenanceSaveModel(id, date, description);
         maintenanceUpdateModel = new MaintenanceUpdateModel(id, date, description);
 
-        customer = new Customer(
-          "name", "surname", "lastname", "phone", date,
-          new Credential(Role.USER, "pwd", "login")
-        );
+        Customer customer = new Customer("name", "surname", "lastname", "7999887766", date,
+          new Credential(Role.USER, "pwd", "login"));
 
         car = new Car("brand", "model", "engine", "color", customer);
         maintenance = new Maintenance(maintenanceSaveModel.getDate(), maintenanceSaveModel.getDescription(), car);
-        maintenanceOpt = Optional.of(maintenance);
     }
 
     @Test
@@ -125,6 +120,7 @@ public class MaintenanceServiceTest {
 
     @Test
     public void should_find_maintenance_by_id_maintenance_find_model_returned() throws MaintenanceNotFoundException {
+        Optional<Maintenance> maintenanceOpt = Optional.of(maintenance);
 
         when(maintenanceRepository.findById(id)).thenReturn(maintenanceOpt);
 
@@ -159,6 +155,8 @@ public class MaintenanceServiceTest {
 
     @Test
     public void should_update_maintenance() throws MaintenanceNotFoundException {
+        Optional<Maintenance> maintenanceOpt = Optional.of(maintenance);
+
         when(maintenanceRepository.findById(id)).thenReturn(maintenanceOpt);
 
         maintenanceService.updateMaintenance(maintenanceUpdateModel);
