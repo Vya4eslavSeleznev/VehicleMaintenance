@@ -2,6 +2,7 @@ package com.vehicle.maintenance.service.impl;
 
 import com.vehicle.maintenance.entity.Car;
 import com.vehicle.maintenance.entity.Customer;
+import com.vehicle.maintenance.entity.Maintenance;
 import com.vehicle.maintenance.exception.CarNotFoundException;
 import com.vehicle.maintenance.exception.CustomerNotFoundException;
 import com.vehicle.maintenance.model.CarFindModel;
@@ -10,10 +11,12 @@ import com.vehicle.maintenance.model.CarUpdateModel;
 import com.vehicle.maintenance.model.CustomerFindModel;
 import com.vehicle.maintenance.repository.CarRepository;
 import com.vehicle.maintenance.repository.CustomerRepository;
+import com.vehicle.maintenance.repository.MaintenanceRepository;
 import com.vehicle.maintenance.service.CarService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,6 +27,7 @@ import java.util.stream.StreamSupport;
 public class CarServiceImpl implements CarService {
 
     private CarRepository carRepository;
+    private MaintenanceRepository maintenanceRepository;
     private CustomerRepository customerRepository;
 
     @Override
@@ -40,7 +44,23 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void deleteCar(long id) {
+    @Transactional
+    public void deleteCar(long id) throws CarNotFoundException {
+        Optional<Car> car = carRepository.findById(id);
+
+        if(car.isEmpty()) {
+            throw new CarNotFoundException();
+        }
+
+        List<Maintenance> maintenanceList = maintenanceRepository.findByCarId(car.get().getId());
+
+        maintenanceRepository.deleteByIdIn(
+          maintenanceList
+            .stream()
+            .map(elem -> elem.getId())
+            .collect(Collectors.toList())
+        );
+
         carRepository.deleteById(id);
     }
 

@@ -11,7 +11,7 @@ import java.util.List;
 public interface CarService {
 
     void saveCar(CarSaveModel carModel) throws CustomerNotFoundException;
-    void deleteCar(long id);
+    void deleteCar(long id) throws CarNotFoundException;
     List<CarFindModel> findAllCars();
     CarFindModel findCarById(long id) throws CarNotFoundException;
     void updateCar(CarUpdateModel carUpdateModel) throws CarNotFoundException;
