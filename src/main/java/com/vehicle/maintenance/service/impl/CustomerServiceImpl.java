@@ -74,7 +74,6 @@ public class CustomerServiceImpl implements CustomerService {
           .map(Car::getId)
           .collect(Collectors.toList());
 
-
         List<Maintenance> listOfMaintenance = maintenanceRepository.findByCarIdIn(carsId);
 
         List<Long> maintenanceIds = listOfMaintenance

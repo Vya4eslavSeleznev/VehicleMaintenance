@@ -8,7 +8,6 @@ import com.vehicle.maintenance.exception.CustomerNotFoundException;
 import com.vehicle.maintenance.model.CarFindModel;
 import com.vehicle.maintenance.model.CarSaveModel;
 import com.vehicle.maintenance.model.CarUpdateModel;
-import com.vehicle.maintenance.model.CustomerFindModel;
 import com.vehicle.maintenance.repository.CarRepository;
 import com.vehicle.maintenance.repository.CustomerRepository;
 import com.vehicle.maintenance.repository.MaintenanceRepository;
@@ -57,7 +56,7 @@ public class CarServiceImpl implements CarService {
         maintenanceRepository.deleteByIdIn(
           maintenanceList
             .stream()
-            .map(elem -> elem.getId())
+            .map(Maintenance::getId)
             .collect(Collectors.toList())
         );
 
