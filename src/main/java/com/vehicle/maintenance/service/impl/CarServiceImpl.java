@@ -49,9 +49,9 @@ public class CarServiceImpl implements CarService {
         return StreamSupport
           .stream(carRepository.findAll().spliterator(), false)
           .map(elem -> new CarFindModel(
-            elem.getBrand(), elem.getModel(), elem.getEngine(), elem.getColor(), elem.getCustomer().getName(),
-            elem.getCustomer().getSurname(), elem.getCustomer().getLastName(), elem.getCustomer().getPhone(),
-            elem.getCustomer().getBirthDate()
+            elem.getId(), elem.getBrand(), elem.getModel(), elem.getEngine(), elem.getColor(),
+            elem.getCustomer().getName(), elem.getCustomer().getSurname(), elem.getCustomer().getLastName(),
+            elem.getCustomer().getPhone(), elem.getCustomer().getBirthDate()
           ))
           .collect(Collectors.toList());
     }
@@ -65,7 +65,7 @@ public class CarServiceImpl implements CarService {
         }
 
         return new CarFindModel(
-          car.get().getBrand(), car.get().getModel(), car.get().getEngine(), car.get().getColor(),
+          car.get().getId(), car.get().getBrand(), car.get().getModel(), car.get().getEngine(), car.get().getColor(),
           car.get().getCustomer().getName(), car.get().getCustomer().getSurname(),
           car.get().getCustomer().getLastName(), car.get().getCustomer().getPhone(),
           car.get().getCustomer().getBirthDate()

@@ -11,6 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class CarFindModel {
 
+    private long id;
     private String brand;
     private String model;
     private String engine;
