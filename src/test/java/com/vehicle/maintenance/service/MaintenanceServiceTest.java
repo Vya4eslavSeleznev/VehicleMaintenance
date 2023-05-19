@@ -72,8 +72,6 @@ public class MaintenanceServiceTest {
 
     @Test
     public void should_save_maintenance() throws CarNotFoundException {
-        maintenanceService = new MaintenanceServiceImpl(maintenanceRepository, carRepository);
-
         Optional<Car> carOpt = Optional.of(car);
 
         when(carRepository.findById(id)).thenReturn(carOpt);
@@ -113,7 +111,16 @@ public class MaintenanceServiceTest {
 
         verify(maintenanceRepository, times(1)).findAll();
 
+        assertEquals(expectedList.get(0).getId(), actualList.get(0).getId());
+        assertEquals(expectedList.get(0).getDate(), actualList.get(0).getDate());
+        assertEquals(expectedList.get(0).getDescription(), actualList.get(0).getDescription());
         assertEquals(expectedList.get(0).getBrand(), actualList.get(0).getBrand());
+        assertEquals(expectedList.get(0).getModel(), actualList.get(0).getModel());
+        assertEquals(expectedList.get(0).getEngine(), actualList.get(0).getEngine());
+        assertEquals(expectedList.get(0).getColor(), actualList.get(0).getColor());
+        assertEquals(expectedList.get(0).getName(), actualList.get(0).getName());
+        assertEquals(expectedList.get(0).getLastName(), actualList.get(0).getLastName());
+        assertEquals(expectedList.get(0).getPhone(), actualList.get(0).getPhone());
     }
 
     @Test

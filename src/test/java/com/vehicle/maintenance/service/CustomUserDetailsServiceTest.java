@@ -41,7 +41,6 @@ public class CustomUserDetailsServiceTest {
 
     @BeforeEach
     public void init() {
-        customUserDetailsService = new CustomUserDetailsService(credentialRepository, passwordEncoder);
         username = "username";
         password = "pwd";
         expectedUC = new Credential(Role.USER, password, username);
