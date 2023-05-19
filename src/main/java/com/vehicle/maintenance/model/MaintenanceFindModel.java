@@ -11,6 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class MaintenanceFindModel {
 
+    private long id;
     private Date date;
     private String description;
     private String brand;

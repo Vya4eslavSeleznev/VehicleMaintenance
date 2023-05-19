@@ -89,7 +89,7 @@ public class CustomerServiceImpl implements CustomerService {
         return StreamSupport
           .stream(customerRepository.findAll().spliterator(), false)
           .map(elem -> new CustomerFindModel(
-            elem.getName(), elem.getSurname(), elem.getLastName(), elem.getPhone(),
+            elem.getId(), elem.getName(), elem.getSurname(), elem.getLastName(), elem.getPhone(),
             elem.getBirthDate(), elem.getCredential().getUsername()
           ))
           .collect(Collectors.toList());
@@ -104,7 +104,7 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         return new CustomerFindModel(
-          customer.get().getName(), customer.get().getSurname(), customer.get().getLastName(),
+          customer.get().getId(), customer.get().getName(), customer.get().getSurname(), customer.get().getLastName(),
           customer.get().getPhone(), customer.get().getBirthDate(), customer.get().getCredential().getUsername()
         );
     }

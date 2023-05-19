@@ -51,7 +51,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         return StreamSupport
           .stream(maintenanceRepository.findAll().spliterator(), false)
           .map(elem -> new MaintenanceFindModel(
-            elem.getDate(), elem.getDescription(), elem.getCar().getBrand(), elem.getCar().getModel(),
+            elem.getId(), elem.getDate(), elem.getDescription(), elem.getCar().getBrand(), elem.getCar().getModel(),
             elem.getCar().getEngine(), elem.getCar().getColor(), elem.getCar().getCustomer().getName(),
             elem.getCar().getCustomer().getLastName(), elem.getCar().getCustomer().getPhone()
           ))
@@ -68,10 +68,11 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
 
         return new MaintenanceFindModel(
-          maintenance.get().getDate(), maintenance.get().getDescription(), maintenance.get().getCar().getBrand(),
-          maintenance.get().getCar().getModel(), maintenance.get().getCar().getEngine(),
-          maintenance.get().getCar().getColor(), maintenance.get().getCar().getCustomer().getName(),
-          maintenance.get().getCar().getCustomer().getLastName(), maintenance.get().getCar().getCustomer().getPhone()
+          maintenance.get().getId(), maintenance.get().getDate(), maintenance.get().getDescription(),
+          maintenance.get().getCar().getBrand(), maintenance.get().getCar().getModel(),
+          maintenance.get().getCar().getEngine(), maintenance.get().getCar().getColor(),
+          maintenance.get().getCar().getCustomer().getName(), maintenance.get().getCar().getCustomer().getLastName(),
+          maintenance.get().getCar().getCustomer().getPhone()
         );
     }
 
