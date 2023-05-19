@@ -1,12 +1,9 @@
 package com.vehicle.maintenance.service.impl;
 
 import com.vehicle.maintenance.entity.Car;
-import com.vehicle.maintenance.entity.Customer;
 import com.vehicle.maintenance.entity.Maintenance;
 import com.vehicle.maintenance.exception.CarNotFoundException;
-import com.vehicle.maintenance.exception.CustomerNotFoundException;
 import com.vehicle.maintenance.exception.MaintenanceNotFoundException;
-import com.vehicle.maintenance.model.CarFindModel;
 import com.vehicle.maintenance.model.MaintenanceFindModel;
 import com.vehicle.maintenance.model.MaintenanceSaveModel;
 import com.vehicle.maintenance.model.MaintenanceUpdateModel;
