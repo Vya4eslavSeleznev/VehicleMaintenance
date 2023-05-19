@@ -6,6 +6,7 @@ import com.vehicle.maintenance.model.CustomerFindModel;
 import com.vehicle.maintenance.model.CustomerSaveModel;
 import com.vehicle.maintenance.model.CustomerUpdateModel;
 import com.vehicle.maintenance.service.CustomerService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> saveCustomer(@RequestBody CustomerSaveModel customerSaveModel) {
         try {
             customerService.saveCustomer(customerSaveModel);
@@ -33,6 +35,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> deleteCustomer(@PathVariable long id) {
         try {
             customerService.deleteCustomer(id);
@@ -45,11 +48,13 @@ public class CustomerController {
     }
 
     @GetMapping("/all")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<List<CustomerFindModel>> findAll() {
         return new ResponseEntity<>(customerService.findAllCustomers(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<CustomerFindModel> findCustomerById(@PathVariable long id) {
         try {
             return new ResponseEntity<>(customerService.findCustomerById(id), HttpStatus.OK);
@@ -61,6 +66,7 @@ public class CustomerController {
     }
 
     @PutMapping("/refreshment")
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<?> updateCustomer(@RequestBody CustomerUpdateModel customerUpdateModel) {
         try {
             customerService.updateCustomer(customerUpdateModel);

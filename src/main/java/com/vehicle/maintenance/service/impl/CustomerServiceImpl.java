@@ -16,6 +16,7 @@ import com.vehicle.maintenance.repository.CustomerRepository;
 import com.vehicle.maintenance.repository.MaintenanceRepository;
 import com.vehicle.maintenance.service.CustomerService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -32,6 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
     private CredentialRepository credentialRepository;
     private CarRepository carRepository;
     private MaintenanceRepository maintenanceRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void saveCustomer(CustomerSaveModel customerSaveModel) throws InvalidInputDataException {
@@ -46,7 +48,9 @@ public class CustomerServiceImpl implements CustomerService {
           new Customer(
             customerSaveModel.getName(), customerSaveModel.getSurname(), customerSaveModel.getLastName(),
             customerSaveModel.getPhone(), customerSaveModel.getBirthDate(),
-            new Credential(Role.USER, customerSaveModel.getPassword(), customerSaveModel.getUsername())
+            new Credential(
+              Role.USER, passwordEncoder.encode(customerSaveModel.getPassword()), customerSaveModel.getUsername()
+            )
           )
         );
     }
