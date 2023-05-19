@@ -60,7 +60,7 @@ public class CustomerController {
         }
     }
 
-    @PutMapping("refreshment")
+    @PutMapping("/refreshment")
     public ResponseEntity<?> updateCustomer(@RequestBody CustomerUpdateModel customerUpdateModel) {
         try {
             customerService.updateCustomer(customerUpdateModel);

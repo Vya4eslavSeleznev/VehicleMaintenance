@@ -54,7 +54,7 @@ public class CarController {
         }
     }
 
-    @PutMapping("refreshment")
+    @PutMapping("/refreshment")
     public ResponseEntity<?> updateCar(@RequestBody CarUpdateModel carUpdateModel) {
         try {
             carService.updateCar(carUpdateModel);
