@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: postgres
+    ports:
+      - 5433:5432
+    healthcheck:
+      test:
+        - CMD
+        - pg_isready
+        - -d
+        - postgres
+        - -U
+        - postgres
+      interval: 5s
+      timeout: 1s
+      retries: 25
+      start_period: 5s
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root123
+      POSTGRES_DB: postgres
+    volumes:
+      - ./data/01_create_car.sql:/docker-entrypoint-initdb.d/01_create_car.sql
+      - ./data/02_init_credential.sql:/docker-entrypoint-initdb.d/02_init_credential.sql
+      - ./data/03_init_customer.sql:/docker-entrypoint-initdb.d/03_init_customer.sql
+      - ./data/04_init_car.sql:/docker-entrypoint-initdb.d/04_init_car.sql
+      - ./data/05_init_maintenance.sql:/docker-entrypoint-initdb.d/05_init_maintenance.sql
+      - ./data/db:/var/lib/postgresql/data
+    restart: always
+
+  vehicle:
+    image: vya4eslava/vehicle:latest
+    restart: always
+    container_name: vehicle
+    ports:
+      - 8081:8080
+    depends_on:
+      postgres:
+        condition: service_healthy
